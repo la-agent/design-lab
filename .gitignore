@@ -8,3 +8,4 @@ app/api/exports/
 .env*
 .DS_Store
 exports/
+next-env.d.ts

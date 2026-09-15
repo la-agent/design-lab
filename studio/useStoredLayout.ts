@@ -14,6 +14,7 @@ export function useStoredLayout(pageId: string) {
   const [retry, setRetry] = useState(0);
   const endpoint = useRef("");
   const last = useRef("");
+  const baseline = useRef(false);
   const queue = useRef(Promise.resolve());
   useEffect(() => {
     const file = fileForPath(window.location.pathname, files);
@@ -44,6 +45,11 @@ export function useStoredLayout(pageId: string) {
   }, [files, pageId, retry]);
   const save = useCallback((layout: CanvasLayout) => {
     const json = JSON.stringify(layout);
+    if (!baseline.current) {
+      baseline.current = true;
+      last.current = json;
+      return;
+    }
     if (!endpoint.current || json === last.current) return;
     last.current = json;
     const url = endpoint.current;

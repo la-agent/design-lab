@@ -15,7 +15,7 @@ Install a reviewed revision in the host's package.json:
 { "dependencies": { "@la-agent/design-lab": "git+https://github.com/la-agent/design-lab.git#FULL_COMMIT_SHA" } }
 ```
 
-Replace FULL_COMMIT_SHA with a real reviewed 40-character commit from the repository; don't paste it literally. Use `gh auth setup-git` if Git cannot authenticate. Keep tokens out of dependency URLs. Run pnpm install and commit the lockfile.
+Replace FULL_COMMIT_SHA with a real reviewed 40-character commit from the repository; don't paste it literally. Use `gh auth setup-git` if Git cannot authenticate. Some pnpm/Git configurations record the dependency using GitHub SSH in the lockfile. In that case, the installing machine or CI also needs authorized GitHub SSH access, or an organization-approved URL rewrite to its existing HTTPS credentials. Keep tokens out of dependency URLs. Run pnpm install and commit the lockfile.
 
 Set `transpilePackages: ["@la-agent/design-lab"]` in next.config.mjs. Use the same React version as the host to avoid duplicate React instances. The framework ships TypeScript and CSS Modules and is compiled by Next.
 

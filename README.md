@@ -37,10 +37,11 @@ For email boards, **HTML** and **Text** download the rendered output. Sending an
 | `pnpm sync` | Validate manifests and regenerate routes/catalog |
 | `pnpm check` | Sync, generate Next route types, and typecheck |
 | `pnpm test` | Framework, discovery, and storage tests |
+| `pnpm smoke` | Start a temporary server on 4298 and verify every preview and email export |
 | `pnpm build` | Build this standalone studio |
 | `pnpm start` | Serve a built, read-only preview locally |
 
-Writes are intentionally restricted to same-origin local development. A deployed preview is not a collaborative editor. Do not expose the dev server to the internet. Shared deployment needs authentication and a durable storage design.
+Writes are intentionally restricted to same-origin local development. A deployed preview is not a collaborative editor. Do not expose the dev server to the internet. Shared deployment needs authentication and a durable storage design. Fullscreen uses the browser viewport; use the canvas width controls for a specific mobile width.
 
 ## Framework vs workspace
 

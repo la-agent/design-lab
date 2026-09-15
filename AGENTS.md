@@ -35,7 +35,7 @@ When given only this repository link, help the user end to end:
 
 ## Verification
 
-Run `pnpm check` and `pnpm test` after implementation. Do one full browser pass after the work is complete; if it finds a bug, fix it and recheck that path. For a new design verify file discovery, every affected version, desktop/mobile width, fullscreen, theme controls, and absence of terminal/browser errors. For framework changes also verify favorites survive reload, layout saving, undo/redo, tabs, and a fresh checkout install. For emails verify downloaded HTML matches preview HTML, plain text is readable, and no localhost asset URLs remain in a deliverable.
+Run `pnpm check`, `pnpm test`, and `pnpm smoke` after implementation. The smoke check starts and stops its own server on port 4298; it reads previews/exports without modifying saved state. Do one full browser pass after the work is complete; if it finds a bug, fix it and recheck that path. For a new design verify file discovery, every affected version, desktop/mobile width, fullscreen, theme controls, and absence of terminal/browser errors. For framework changes also verify favorites survive reload, layout saving, undo/redo, tabs, and a fresh checkout install. For emails verify downloaded HTML matches preview HTML, plain text is readable, and no localhost asset URLs remain in a deliverable.
 
 A browser preview is not proof of Gmail/Outlook/Apple Mail rendering. State which clients were actually tested. Do not send email, deploy, publish, invite users, or add paid integrations unless the user authorizes that action.
 
@@ -50,3 +50,13 @@ Source code is trusted local code executed by the user's development server. Pre
 Use pnpm, TypeScript strict mode, named functions and `import type`. No `as any`, secrets, or unrelated dependency changes. Use relative imports within framework modules, explicit package subpaths from a host. Keep preview component imports out of the shared catalog/shell: one static route per version prevents every preview from joining the same module graph. Runtime boundaries do not isolate syntax/compiler failures.
 
 Next.js documentation ships at `node_modules/next/dist/docs/`; consult the relevant guide before changing framework routing or server/client boundaries. This starter uses Next 16.3; use its installed types rather than assumptions from older Next versions.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

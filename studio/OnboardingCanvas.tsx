@@ -178,7 +178,7 @@ export function CanvasStudy({
       </aside>
       {pages.map((page) => (
         <CanvasWorkspace
-          key={page.id}
+          key={`${page.id}:${page.boards.map((board) => board.id).join(",")}`}
           page={page}
           active={page.id === activePage.id}
           renderBoard={renderBoard}
@@ -216,7 +216,11 @@ function CanvasWorkspace(props: {
           onLayoutChange={stored.save}
         />
       </CanvasHistory>
-      {props.active && stored.error && <div role="alert">{stored.error}</div>}
+      {props.active && stored.error && (
+        <div role="alert" className={styles.persistenceError}>
+          {stored.error}
+        </div>
+      )}
     </>
   );
 }
@@ -523,8 +527,23 @@ function CanvasWorkspaceContent({
       }));
     }
     window.addEventListener("design-canvas-focus", focusBoard);
+    const location = new URL(window.location.href);
+    const hash = location.hash.replace(/^#board-/u, "");
+    const version = location.searchParams.get("version");
+    const initialBoard = page.boards.find(
+      (board) =>
+        board.id === hash || (version && board.id.endsWith(`-${version}`))
+    );
+    const initialFrame = initialBoard
+      ? requestAnimationFrame(() =>
+          focusBoard(
+            new CustomEvent("design-canvas-focus", { detail: initialBoard.id })
+          )
+        )
+      : undefined;
     area.addEventListener("wheel", wheel, { passive: false, capture: true });
     return () => {
+      if (initialFrame !== undefined) cancelAnimationFrame(initialFrame);
       area.removeEventListener("wheel", wheel, true);
       window.removeEventListener("design-canvas-focus", focusBoard);
     };

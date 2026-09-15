@@ -35,7 +35,8 @@
     "check": "node bin/design-lab.mjs sync && next typegen && tsc --noEmit",
     "test": "vitest run",
     "build": "node bin/design-lab.mjs sync && next build",
-    "start": "next start --hostname 127.0.0.1 -p 4204"
+    "start": "next start --hostname 127.0.0.1 -p 4204",
+    "smoke": "node bin/smoke.mjs"
   },
   "dependencies": {
     "@react-email/components": "1.0.1",

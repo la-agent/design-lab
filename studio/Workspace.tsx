@@ -63,6 +63,7 @@ export function StudioFileCanvas({
   }, [file.id]);
   return (
     <CanvasStudy
+      key={file.id}
       title={file.title}
       pages={pages}
       initialPageId={initialPageId}
@@ -86,6 +87,7 @@ export function StudioResult({ file }: { file: StudioFile }) {
   if (!board) return null;
   return (
     <CanvasStudy
+      key={file.id}
       title={file.title}
       pages={[{ id: "result", title: "Result", boards: [board] }]}
       renderBoard={(item) => (
