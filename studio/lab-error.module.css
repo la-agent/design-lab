@@ -1,0 +1,59 @@
+.panel {
+  max-width: 680px;
+  margin: 48px auto;
+  padding: 28px;
+  color: var(--lab-ink);
+}
+.panel h1 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin: 0 0 12px;
+}
+.panel p {
+  color: var(--lab-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.actions button,
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 14px;
+  border: 1px solid var(--lab-line);
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.actions button:first-child {
+  background: var(--lab-ink);
+  color: var(--lab-panel);
+}
+.actions button:hover,
+.actions a:hover {
+  opacity: 0.8;
+}
+.details {
+  border-top: 1px solid var(--lab-line);
+  margin-top: 28px;
+  font-size: 12px;
+}
+.details summary {
+  cursor: pointer;
+  padding: 16px 0;
+  color: var(--lab-muted);
+}
+.details pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}

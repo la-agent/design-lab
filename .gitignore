@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.studio/catalog.ts
+.studio/generated-routes.json
+app/previews/generated/
+app/api/exports/
+*.tsbuildinfo
+.env*
+.DS_Store
+exports/

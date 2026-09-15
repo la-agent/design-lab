@@ -1,0 +1,58 @@
+{
+  "name": "@la-agent/design-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Filesystem-first design studio and starter for agent-authored web and email designs",
+  "bin": {
+    "design-lab": "bin/design-lab.mjs"
+  },
+  "files": [
+    "studio",
+    "bin",
+    "README.md",
+    "AGENTS.md",
+    "docs"
+  ],
+  "type": "module",
+  "exports": {
+    "./shell": "./studio/LabShell.tsx",
+    "./canvas": "./studio/OnboardingCanvas.tsx",
+    "./preview": "./studio/HomepageBoard.tsx",
+    "./history": "./studio/CanvasHistory.tsx",
+    "./types": "./studio/types.ts",
+    "./files": "./studio/files.ts",
+    "./decisions": "./studio/decision-store.ts",
+    "./error": "./studio/LabError.tsx",
+    "./route-error": "./studio/RouteFailure.tsx",
+    "./workspace": "./studio/Workspace.tsx",
+    "./globals.css": "./studio/globals.css",
+    "./sync": "./bin/sync.mjs",
+    "./layouts": "./studio/layout-store.ts"
+  },
+  "scripts": {
+    "dev": "node bin/design-lab.mjs dev",
+    "sync": "node bin/design-lab.mjs sync",
+    "check": "node bin/design-lab.mjs sync && next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "build": "node bin/design-lab.mjs sync && next build",
+    "start": "next start --hostname 127.0.0.1 -p 4204"
+  },
+  "dependencies": {
+    "@react-email/components": "1.0.1",
+    "lucide-react": "1.33.0",
+    "next": "16.3.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "7.0.2",
+    "vitest": "4.1.5"
+  },
+  "engines": {
+    "node": ">=22.14 <23"
+  },
+  "packageManager": "pnpm@10.0.0"
+}
