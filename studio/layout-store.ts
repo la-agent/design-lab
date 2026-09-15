@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile, rename } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 
 import { isCanvasLayout, isLayoutStore } from "./layout-state";
+import { isLocalStudioWrite } from "./local-write";
 import type { StudioFile } from "./types";
 export function createLayoutHandlers({
   files,
@@ -47,11 +48,7 @@ export function createLayoutHandlers({
   }
   async function PUT(request: Request) {
     const url = new URL(request.url);
-    if (
-      process.env.NODE_ENV !== "development" ||
-      !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) ||
-      request.headers.get("origin") !== url.origin
-    )
+    if (!isLocalStudioWrite(request))
       return Response.json(
         { error: "Layouts can only be saved in the local Studio" },
         { status: 403 }

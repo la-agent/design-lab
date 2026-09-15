@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { createDecisionHandlers } from "./decision-store";
 import { createLayoutHandlers } from "./layout-store";
+import { isLocalStudioWrite } from "./local-write";
 const directories: string[] = [];
 afterEach(async () => {
   vi.unstubAllEnvs();
@@ -115,4 +116,25 @@ describe("local workspace storage", () => {
       ).status
     ).toBe(400);
   });
+});
+
+it("accepts Next-normalized loopback URLs without accepting foreign hosts", () => {
+  vi.stubEnv("NODE_ENV", "development");
+  expect(
+    isLocalStudioWrite(
+      new Request("http://localhost:4203/api/layouts", {
+        headers: { host: "127.0.0.1:4203", origin: "http://127.0.0.1:4203" },
+      })
+    )
+  ).toBe(true);
+  expect(
+    isLocalStudioWrite(
+      new Request("http://localhost:4203/api/layouts", {
+        headers: {
+          host: "evil.example:4203",
+          origin: "http://evil.example:4203",
+        },
+      })
+    )
+  ).toBe(false);
 });
